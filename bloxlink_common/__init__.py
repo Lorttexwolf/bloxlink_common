@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from contextlib import suppress
-from typing import Any
+from typing import Any, Callable, Iterable
 from enum import Enum
 import datetime
 import copy
@@ -36,6 +36,7 @@ class UserData(PartialMixin):
     robloxID: str = None
     robloxAccounts: dict = default_field({"accounts":[], "guilds": {}})
 
+# TODO: Implement types for binds.
 @dataclass(slots=True)
 class GuildData:
     id: int
@@ -48,6 +49,18 @@ class GuildData:
     unverifiedRoleEnabled: bool = True
     unverifiedRoleName: str = "Unverified" # deprecated
     unverifiedRole: str = None
+    
+    def get_binds(self, bind_type: str):
+        '''Retrieves all binds that match the given bind type.'''
+        return [bind for bind in self.binds if bind["bind"]["type"] == bind_type]
+    
+    def find_bind(self, bind_type: str, predicate: Callable):
+        '''Retrieves the first bind that matches the given type and predicate.'''
+        for bind in self.get_binds(bind_type):
+            if predicate(bind):
+                return bind
+        return None
+    
 
 class RobloxThumbnailSizes(Enum):
     AVATAR_48x48 = "48x48"
