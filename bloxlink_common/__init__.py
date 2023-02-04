@@ -7,7 +7,6 @@ from enum import Enum
 import datetime
 import copy
 
-
 __all__ = [
     "UserData", 
     "GuildData",
@@ -68,12 +67,31 @@ class MinimalRobloxUser():
     id: int = -1 # -1 represents un-set id.
 
 @dataclass(slots=True)
+class ExtendedRobloxUserGroupEntryData:
+    id: int = -1
+    name: str = None
+    memberCount: int = -1
+    hasVerifiedBadge: bool = False
+
+@dataclass(slots=True)
+class ExtendedRobloxUserGroupEntryRole:
+    id: int = -1
+    name: str = None
+    rank: int = -1
+
+# Might be an easier way to represent an object, with these keys using the typing lib.
+@dataclass(slots=True)
+class ExtendedRobloxUserGroupEntry:
+    group: ExtendedRobloxUserGroupEntryData
+    role: ExtendedRobloxUserGroupEntryRole
+
+@dataclass(slots=True)
 # Retrieve from the enhanced Roblox user retrieval API https://bloxlink-info-server-vunlj.ondigitalocean.ap
 class ExtendedRobloxUser(MinimalRobloxUser):
     username: str = None
     banned: bool = None
     age_days: int = None
-    groups: dict = None
+    groups: list[ExtendedRobloxUserGroupEntry] = []
     avatar: str = None
     description: str = None
     display_name: str = None
