@@ -12,7 +12,9 @@ __all__ = [
     "GuildData",
     "MinimalRobloxUser",
     "ExtendedRobloxUser",
-    "RobloxThumbnailSizes"
+    "RobloxThumbnailSizes",
+    "ExtendedRobloxUserGroupEntryRole",
+    "ExtendedRobloxUserGroupEntryData"
 ]
 
 def default_field(obj):
@@ -35,12 +37,17 @@ class UserData(PartialMixin):
     id: int
     robloxID: str = None
     robloxAccounts: dict = default_field({"accounts":[], "guilds": {}})
+    
+    @staticmethod
+    def from_dict(data: dict):
+        return UserData(**data)
 
 # TODO: Implement types for binds.
 @dataclass(slots=True)
 class GuildData:
     id: int
     binds: list = default_field([]) # FIXME
+    nicknameTemplate: str = None
 
     verifiedRoleEnabled: bool = True
     verifiedRoleName: str = "Verified" # deprecated
@@ -60,6 +67,10 @@ class GuildData:
             if predicate(bind):
                 return bind
         return None
+    
+    @staticmethod
+    def from_dict(data: dict):
+        return GuildData(**data)
     
 
 class RobloxThumbnailSizes(Enum):
@@ -119,3 +130,7 @@ class ExtendedRobloxUser(MinimalRobloxUser):
         for group in self.groups:
             if group.group.id == group_id: return group.role
         return None
+    
+    @staticmethod
+    def from_dict(data: dict):
+        return ExtendedRobloxUser(**data)
