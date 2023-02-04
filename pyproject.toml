@@ -1,5 +1,5 @@
 [project]
-name = "bloxlink-common"
+name = "bloxlink_common"
 version = "0.0.1"
 authors = [
   { name="Lorttexwolf" },
@@ -14,4 +14,4 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Lorttexwolf/bloxlink-common"
+"Homepage" = "https://github.com/Lorttexwolf/bloxlink_common"

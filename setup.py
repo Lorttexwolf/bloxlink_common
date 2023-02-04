@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name="bloxlink-common",
+setup(name="bloxlink_common",
       version="1.0.1",
-      packages=['bloxlink-common']
+      packages=['bloxlink_common']
 )
