@@ -99,7 +99,7 @@ class ExtendedRobloxUserGroupEntry:
     role: ExtendedRobloxUserGroupEntryRole
 
 @dataclass(slots=True)
-# Retrieve from the enhanced Roblox user retrieval API https://bloxlink-info-server-vunlj.ondigitalocean.ap
+# Retrieve from the enhanced Roblox user retrieval API https://bloxlink-info-server-vunlj.ondigitalocean.app
 class ExtendedRobloxUser(MinimalRobloxUser):
     username: str = None
     banned: bool = None
@@ -113,3 +113,9 @@ class ExtendedRobloxUser(MinimalRobloxUser):
     short_age_string: str = None
     flags: int = None
     overlay: int = None
+    
+    def get_group_role(self, group_id) -> ExtendedRobloxUserGroupEntryRole | None:
+        '''Retrieves the role of the user in the given group.'''
+        for group in self.groups:
+            if group.group.id == group_id: return group.role
+        return None
