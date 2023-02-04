@@ -91,11 +91,11 @@ class ExtendedRobloxUser(MinimalRobloxUser):
     username: str = None
     banned: bool = None
     age_days: int = None
-    groups: list[ExtendedRobloxUserGroupEntry] = []
+    groups: list[ExtendedRobloxUserGroupEntry] = field(default_factory=lambda: [])
     avatar: str = None
     description: str = None
     display_name: str = None
-    created: datetime.datetime = None
+    created: datetime.datetime = datetime.datetime.now()
     badges: list = None
     short_age_string: str = None
     flags: int = None
