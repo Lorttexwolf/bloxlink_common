@@ -86,7 +86,7 @@ class RobloxThumbnailSizes(Enum):
     
     
 @dataclass(slots=True)
-class MinimalRobloxUser():
+class MinimalRobloxUser(object):
     '''Represents the minimal structure of a Roblox user.'''
     id: int = -1 # -1 represents un-set id.
 
@@ -112,7 +112,7 @@ class ExtendedRobloxUserGroupEntry:
 @dataclass(slots=True)
 # Retrieve from the enhanced Roblox user retrieval API https://bloxlink-info-server-vunlj.ondigitalocean.app
 class ExtendedRobloxUser(MinimalRobloxUser):
-    username: str = None
+    name: str = None
     banned: bool = None
     age_days: int = None
     groups: list[ExtendedRobloxUserGroupEntry] = field(default_factory=lambda: [])
