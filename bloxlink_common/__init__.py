@@ -113,15 +113,14 @@ class ExtendedRobloxUserGroupEntry:
 # Retrieve from the enhanced Roblox user retrieval API https://bloxlink-info-server-vunlj.ondigitalocean.app
 class ExtendedRobloxUser(MinimalRobloxUser):
     name: str = None
-    banned: bool = None
+    isBanned: bool = None
     groups: list[ExtendedRobloxUserGroupEntry] | None = field(default_factory=lambda: [])
     avatar: dict = None
     description: str = None
     displayName: str = None
     created: datetime.datetime = datetime.datetime.now()
-    badges: list = None
+    badges: list[dict] = None
     flags: int = None
-    overlay: int = None
     
     def get_group_role(self, group_id) -> ExtendedRobloxUserGroupEntryRole | None:
         '''Retrieves the role of the user in the given group.'''
